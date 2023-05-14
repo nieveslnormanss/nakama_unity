@@ -21,7 +21,12 @@ public class NakamaClient : MonoBehaviour
 
         socket.Connected +=() => Debug.Log("Socket connected.");
 
-        socket.Closed +=() => Debug.Log("Socket closed");  
+        socket.Closed +=() => Debug.Log("Socket closed");
+
+        socket.ReceivedChannelMessage += message =>
+        {
+            Debug.LogFormat("Rcceived: {0}",message);
+        };
     
         await socket.ConnectAsync(session);
 

@@ -23,20 +23,14 @@ public class NakamaClient : MonoBehaviour
 
         socket.Closed +=() => Debug.Log("Socket closed");
 
-        socket.ReceivedChannelMessage += message =>
-        {
-            Debug.LogFormat("Rcceived: {0}",message);
-        };
-    
         await socket.ConnectAsync(session);
 
-        var channel = await socket.JoinChatAsync(RoomName,ChannelType.Room);
+        string rpcId = "healthcheck";
 
-        Debug.LogFormat("Join chat channel: {0}",channel);
+        var response = await socket.RpcAsync(rpcId);
 
-        var content = new Dictionary<string,string>{{"hello","world"}}.ToJson();
-
-        _ = socket.WriteChatMessageAsync(channel,content);
+        Debug.Log("RPC Response: " + response.Payload);
+        
     }
 
     // Update is called once per frame

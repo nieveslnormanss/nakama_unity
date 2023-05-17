@@ -54,6 +54,19 @@ public class NakamaClient : MonoBehaviour
                 string json = JsonWriter.ToJson(message);
                 await socket.SendMatchStateAsync(match.Id, 11, json);
             };
+            
+            socket.ReceivedMatchState += async matchState => {
+
+                string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
+
+                if (matchState.OpCode == 13) {
+                    TestMatch temp = JsonParser.FromJson<TestMatch>(messageJson);
+                    // Do stuff with the spell (instantiate object, destroy towers, etc.)
+                    Debug.Log(temp);
+                }
+            };
+
+
         } catch (Exception e)
         {
             // 在这里处理异常，例如打印错误信息

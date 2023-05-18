@@ -55,11 +55,12 @@ public class NakamaClient : MonoBehaviour
                 await socket.SendMatchStateAsync(match.Id, 11, json);
             };
             
-            socket.ReceivedMatchState += async matchState => {
+            socket.ReceivedMatchState += matchState => {
 
+                Debug.Log("sadfjsdlkfjsdlkjflkdasf");
                 string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
 
-                if (matchState.OpCode == 13) {
+                if (matchState.OpCode == 11) {
                     TestMatch temp = JsonParser.FromJson<TestMatch>(messageJson);
                     // Do stuff with the spell (instantiate object, destroy towers, etc.)
                     Debug.Log(temp);

@@ -53,6 +53,7 @@ public class NakamaClient : MonoBehaviour
                 message.Testinfo = "test";
                 string json = JsonWriter.ToJson(message);
                 await socket.SendMatchStateAsync(match.Id, 11, json);
+                Session.Restore
             };
             
             socket.ReceivedMatchState += matchState => {

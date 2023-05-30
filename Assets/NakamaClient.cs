@@ -25,7 +25,7 @@ public class NakamaClient : MonoBehaviour
 
         await socket.ConnectAsync(session);
 
-        string rpcId = "healthcheck";
+        string rpcId = "rpc_create_match";
 
         var response = await socket.RpcAsync(rpcId);
 

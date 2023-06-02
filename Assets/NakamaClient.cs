@@ -47,6 +47,10 @@ public class NakamaClient : MonoBehaviour
 
         Debug.Log("RPC Response: " + response.Payload);
 
+        var match = await socket.JoinMatchAsync(response.Payload);
+
+        Debug.Log(match);
+
         var newState = new Dictionary<string, string> {{"hello", "world"}}.ToJson();
 
         //await socket.SendMatchStateAsync(response.Payload,1,newState);
